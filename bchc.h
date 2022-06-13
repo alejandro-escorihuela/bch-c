@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include "recur.h"
 
-void metode_setABA9(int num_cofs, double * cofs, double * res, int depth);
+void metode_setABA9(int s, double * cofs, double * res, int depth);
 void metode_setBAB9(int num_cofs, double * cofs, double * res, int depth);
 
 #endif

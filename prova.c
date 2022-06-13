@@ -15,7 +15,7 @@ int main () {
     cofs[2*i] = a[i];
     cofs[2*i + 1] = b[i];
   }
-  metode_setABA9(35, cofs, res, lim);
+  metode_setABA9(17, cofs, res, lim);
   for (i = 0; i < lim; i++)
     printf("esq[%d] = %.14f\n", i, res[i]);
   return 0;
