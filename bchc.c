@@ -9,23 +9,47 @@ void metode_setABA9(int s, double * cofs, double * res, int depth) {
   int i;
   for (i = 0; i < TAMBCH; i++)
     res[i] = 0.0;
-  if (s % 2 == 1) {
+  if (s % 2 == 1)
     res[1] = cofs[s];
-    for (i = s - 1; i >= 0; i--)
-      recAB9(res, cofs[i], depth, i);
-    }
-  else {
+  else
     res[0] = cofs[s];
-    for (i = s - 1; i >= 0; i--)
-      recAB9(res, cofs[i], depth, i);
-  }      
+  for (i = s - 1; i >= 0; i--)
+    recAB9(res, cofs[i], depth, i);    
 }
 
-void metode_setBAB9(int num_cofs, double * cofs, double * res, int depth) {
+/* no provat. hi ha que provar si aquest procediment funciona correctament */
+void metode_setBAB9(int s, double * cofs, double * res, int depth) {
   int i;
   for (i = 0; i < TAMBCH; i++)
     res[i] = 0.0;
-  res[0] = cofs[num_cofs/2];
-  for (i = num_cofs/2 - 1; i >= 0; i--)
-    recAB9(res, cofs[i], depth, i + 1);
+  if (s % 2 == 1)
+    res[0] = cofs[s];
+  else
+    res[1] = cofs[s];
+  for (i = s - 1; i >= 0; i--)
+    recAB9(res, cofs[i], depth, i + 1);    
+}
+
+void metode_setSCABA9(int s, double complex * cofs, double * res, int depth) {
+  int i;
+  for (i = 0; i < TAMBCH; i++)
+    res[i] = 0.0;
+  if (s % 2 == 1)
+    res[1] = creal(cofs[s]);
+  else
+    res[0] = creal(cofs[s]);
+  for (i = s - 1; i >= 0; i--)
+    recSCAB9(res, creal(cofs[i]), cimag(cofs[i]), depth, i);
+}
+
+void metode_setSCBAB9(int s, double complex * cofs, double * res, int depth) {
+  int i;
+  for (i = 0; i < TAMBCH; i++)
+    res[i] = 0.0;
+  if (s % 2 == 1)
+    res[0] = creal(cofs[s]);
+  else
+    res[1] = creal(cofs[s]);
+  for (i = s - 1; i >= 0; i--)
+    recSCAB9(res, creal(cofs[i]), cimag(cofs[i]), depth, i + 1);
 }

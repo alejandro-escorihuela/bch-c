@@ -6,11 +6,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#define TAMBCH 84
+#include <complex.h>
+#define TAMBCH 128
 
 void copyesq(double * dest, double * orig);
+
 void recAB9(double * res, double x, int depth, int b);
 void recA9(double * res, double x, int depth);
 void recB9(double * res, double x, int depth);
+
+void recSCAB9(double * res, double xre, double xim, int depth, int b);
+void recSCA9(double * res, double xre, double xim, int depth);
+void recSCB9(double * res, double xre, double xim, int depth);
 
 #endif

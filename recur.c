@@ -227,3 +227,49 @@ void recB9(double * res, double x, int depth) {
     res[83] = (127.0/604800.0)*pow(x, 8)*alp[0] + (127.0/151200.0)*pow(x, 7)*alp[0]*alp[1] + (157.0/113400.0)*pow(x, 6)*alp[0]*pow(alp[1], 2) + (31.0/15120.0)*pow(x, 6)*alp[3] + (367.0/302400.0)*pow(x, 5)*alp[0]*pow(alp[1], 3) + (31.0/5040.0)*pow(x, 5)*alp[1]*alp[3] + (23.0/37800.0)*pow(x, 4)*alp[0]*pow(alp[1], 4) + (13.0/1890.0)*pow(x, 4)*pow(alp[1], 2)*alp[3] + (7.0/360.0)*pow(x, 4)*alp[9] + (79.0/453600.0)*pow(x, 3)*alp[0]*pow(alp[1], 5) + (53.0/15120.0)*pow(x, 3)*pow(alp[1], 3)*alp[3] + (7.0/180.0)*pow(x, 3)*alp[1]*alp[9] + (1.0/37800.0)*pow(x, 2)*alp[0]*pow(alp[1], 6) + (1.0/1260.0)*pow(x, 2)*pow(alp[1], 4)*alp[3] + (1.0/45.0)*pow(x, 2)*pow(alp[1], 2)*alp[9] - 1.0/6.0*pow(x, 2)*alp[27] + (1.0/604800.0)*x*alp[0]*pow(alp[1], 7) + (1.0/15120.0)*x*pow(alp[1], 5)*alp[3] + (1.0/360.0)*x*pow(alp[1], 3)*alp[9] - 1.0/6.0*x*alp[1]*alp[27] + alp[83];
   }
 }
+
+void recSCAB9(double * res, double xre, double xim, int depth, int b) {
+  if (b%2 == 0)
+    recSCA9(res, xre, xim, depth);
+  else
+    recSCB9(res, xre, xim, depth);
+}
+
+void recSCA9(double * res, double xre, double xim, int depth) {
+  double alp[TAMBCH];
+  copyesq(alp, res);
+  res[0] = 2*xre + alp[0];
+  res[1] = alp[1];
+  res[2] = xim*alp[1] + alp[2];
+  res[3] = -1.0/2.0*pow(xim, 2)*alp[1] - xim*alp[2] - 1.0/6.0*pow(xre, 2)*alp[1] - 1.0/6.0*xre*alp[0]*alp[1] + alp[3];
+  res[4] = -1.0/6.0*xre*pow(alp[1], 2) + alp[4];
+  res[5] = -1.0/6.0*pow(xim, 3)*alp[1] - 1.0/2.0*pow(xim, 2)*alp[2] - 1.0/6.0*xim*pow(xre, 2)*alp[1] - 1.0/6.0*xim*xre*alp[0]*alp[1] + xim*alp[3] - 1.0/6.0*pow(xre, 2)*alp[2] - 1.0/6.0*xre*alp[0]*alp[2] + alp[5];
+  res[6] = -1.0/6.0*xim*xre*pow(alp[1], 2) + xim*alp[4] - 1.0/6.0*xre*alp[1]*alp[2] + alp[6];
+  res[7] = alp[7];
+  res[8] = (1.0/24.0)*pow(xim, 4)*alp[1] + (1.0/6.0)*pow(xim, 3)*alp[2] + (1.0/12.0)*pow(xim, 2)*pow(xre, 2)*alp[1] + (1.0/12.0)*pow(xim, 2)*xre*alp[0]*alp[1] - 1.0/2.0*pow(xim, 2)*alp[3] + (1.0/6.0)*xim*pow(xre, 2)*alp[2] + (1.0/6.0)*xim*xre*alp[0]*alp[2] - xim*alp[5] + (7.0/360.0)*pow(xre, 4)*alp[1] + (7.0/180.0)*pow(xre, 3)*alp[0]*alp[1] + (1.0/45.0)*pow(xre, 2)*pow(alp[0], 2)*alp[1] - 1.0/6.0*pow(xre, 2)*alp[3] + (1.0/360.0)*xre*pow(alp[0], 3)*alp[1] - 1.0/6.0*xre*alp[0]*alp[3] + alp[8];
+  res[9] = (1.0/45.0)*pow(xre, 3)*pow(alp[1], 2) + (1.0/30.0)*pow(xre, 2)*alp[0]*pow(alp[1], 2) + (1.0/360.0)*xre*pow(alp[0], 2)*pow(alp[1], 2) - 1.0/3.0*xre*alp[1]*alp[3] - 1.0/6.0*xre*pow(alp[2], 2) + alp[9];
+  res[10] = -1.0/12.0*pow(xim, 2)*xre*pow(alp[1], 2) + (1.0/2.0)*pow(xim, 2)*alp[4] - 1.0/6.0*xim*xre*alp[1]*alp[2] + xim*alp[6] - 1.0/60.0*pow(xre, 3)*pow(alp[1], 2) - 1.0/90.0*pow(xre, 2)*alp[0]*pow(alp[1], 2) + (1.0/6.0)*pow(xre, 2)*alp[4] - 1.0/180.0*xre*pow(alp[0], 2)*pow(alp[1], 2) + (1.0/6.0)*xre*alp[0]*alp[4] - 1.0/6.0*xre*alp[1]*alp[3] - 1.0/6.0*xre*pow(alp[2], 2) + alp[10];
+  res[11] = (1.0/30.0)*pow(xre, 2)*pow(alp[1], 3) + (1.0/180.0)*xre*alp[0]*pow(alp[1], 3) - 1.0/3.0*xre*alp[1]*alp[4] + alp[11];
+  res[12] = -xim*alp[7] + (1.0/90.0)*pow(xre, 2)*pow(alp[1], 3) - 1.0/360.0*xre*alp[0]*pow(alp[1], 3) - 1.0/6.0*xre*alp[1]*alp[4] + alp[12];
+  res[13] = -1.0/360.0*xre*pow(alp[1], 4) + alp[13];
+}
+
+
+void recSCB9(double * res, double xre, double xim, int depth) {
+  double alp[TAMBCH];
+  copyesq(alp, res);
+  res[0] = alp[0];
+  res[1] = 2*xre + alp[1];
+  res[2] = -xim*alp[0] + alp[2];
+  res[3] = (1.0/6.0)*xre*pow(alp[0], 2) + alp[3];
+  res[4] = (1.0/2.0)*pow(xim, 2)*alp[0] - xim*alp[2] + (1.0/6.0)*pow(xre, 2)*alp[0] + (1.0/6.0)*xre*alp[0]*alp[1] + alp[4];
+  res[5] = alp[5];
+  res[6] = (1.0/6.0)*xim*xre*pow(alp[0], 2) + xim*alp[3] - 1.0/6.0*xre*alp[0]*alp[2] + alp[6];
+  res[7] = -1.0/6.0*pow(xim, 3)*alp[0] + (1.0/2.0)*pow(xim, 2)*alp[2] - 1.0/6.0*xim*pow(xre, 2)*alp[0] - 1.0/6.0*xim*xre*alp[0]*alp[1] - xim*alp[4] + (1.0/6.0)*pow(xre, 2)*alp[2] + (1.0/6.0)*xre*alp[1]*alp[2] + alp[7];
+  res[8] = -1.0/360.0*xre*pow(alp[0], 4) + alp[8];
+  res[9] = -xim*alp[5] + (1.0/90.0)*pow(xre, 2)*pow(alp[0], 3) - 1.0/360.0*xre*pow(alp[0], 3)*alp[1] + (1.0/6.0)*xre*alp[0]*alp[3] + alp[9];
+  res[10] = (1.0/30.0)*pow(xre, 2)*pow(alp[0], 3) + (1.0/180.0)*xre*pow(alp[0], 3)*alp[1] + (1.0/3.0)*xre*alp[0]*alp[3] + alp[10];
+  res[11] = -1.0/12.0*pow(xim, 2)*xre*pow(alp[0], 2) - 1.0/2.0*pow(xim, 2)*alp[3] + (1.0/6.0)*xim*xre*alp[0]*alp[2] - xim*alp[6] - 1.0/60.0*pow(xre, 3)*pow(alp[0], 2) - 1.0/90.0*pow(xre, 2)*pow(alp[0], 2)*alp[1] - 1.0/6.0*pow(xre, 2)*alp[3] - 1.0/180.0*xre*pow(alp[0], 2)*pow(alp[1], 2) + (1.0/6.0)*xre*alp[0]*alp[4] - 1.0/6.0*xre*alp[1]*alp[3] - 1.0/6.0*xre*pow(alp[2], 2) + alp[11];
+  res[12] = (1.0/45.0)*pow(xre, 3)*pow(alp[0], 2) + (1.0/30.0)*pow(xre, 2)*pow(alp[0], 2)*alp[1] + (1.0/360.0)*xre*pow(alp[0], 2)*pow(alp[1], 2) + (1.0/3.0)*xre*alp[0]*alp[4] - 1.0/6.0*xre*pow(alp[2], 2) + alp[12];
+  res[13] = (1.0/24.0)*pow(xim, 4)*alp[0] - 1.0/6.0*pow(xim, 3)*alp[2] + (1.0/12.0)*pow(xim, 2)*pow(xre, 2)*alp[0] + (1.0/12.0)*pow(xim, 2)*xre*alp[0]*alp[1] + (1.0/2.0)*pow(xim, 2)*alp[4] - 1.0/6.0*xim*pow(xre, 2)*alp[2] - 1.0/6.0*xim*xre*alp[1]*alp[2] - xim*alp[7] + (7.0/360.0)*pow(xre, 4)*alp[0] + (7.0/180.0)*pow(xre, 3)*alp[0]*alp[1] + (1.0/45.0)*pow(xre, 2)*alp[0]*pow(alp[1], 2) + (1.0/6.0)*pow(xre, 2)*alp[4] + (1.0/360.0)*xre*alp[0]*pow(alp[1], 3) + (1.0/6.0)*xre*alp[1]*alp[4] + alp[13];
+}
